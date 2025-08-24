@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Core.Controllers;
 
 [ApiController]
-[Route("/split-rules")]
+[Route("split-rules")]
 public class SplitRulesController : ControllerBase
 {
     [HttpPost]

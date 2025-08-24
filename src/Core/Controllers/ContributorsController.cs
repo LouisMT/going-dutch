@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Core.Controllers;
 
 [ApiController]
-[Route("/contributors")]
+[Route("contributors")]
 public class ContributorsController : ControllerBase
 {
     [HttpPost]
