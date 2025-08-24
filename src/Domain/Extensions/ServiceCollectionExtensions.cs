@@ -7,18 +7,16 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddDomain(this IServiceCollection services)
     {
-        AddOptions(services);
-        
+        services.AddOptions();
+
         return services;
     }
 
-    private static IServiceCollection AddOptions(IServiceCollection services)
+    private static void AddOptions(this IServiceCollection services)
     {
         services.AddOptions<PostgresOptions>()
             .BindConfiguration(PostgresOptions.Name)
             .ValidateDataAnnotations()
             .ValidateOnStart();
-
-        return services;
     }
 }

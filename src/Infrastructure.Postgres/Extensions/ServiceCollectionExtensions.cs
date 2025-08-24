@@ -1,5 +1,7 @@
 using Domain.Options;
+using Domain.Repositories;
 using FluentMigrator.Runner;
+using Infrastructure.Postgres.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Npgsql;
@@ -10,12 +12,24 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddPostgres(this IServiceCollection services)
     {
+        services.AddDataSource();
+        services.AddMigrations();
+        services.AddRepositories();
+
+        return services;
+    }
+
+    private static void AddDataSource(this IServiceCollection services)
+    {
         services.AddNpgsqlDataSource(string.Empty, (serviceProvider, builder) =>
         {
             var options = serviceProvider.GetRequiredService<IOptions<PostgresOptions>>();
             builder.ConnectionStringBuilder.ConnectionString = GenerateConnectionString(options);
         });
+    }
 
+    private static void AddMigrations(this IServiceCollection services)
+    {
         services.AddFluentMigratorCore()
             .ConfigureRunner(builder =>
             {
@@ -27,8 +41,12 @@ public static class ServiceCollectionExtensions
                     })
                     .ScanIn(typeof(ServiceCollectionExtensions).Assembly).For.All();
             });
+    }
 
-        return services;
+    private static void AddRepositories(this IServiceCollection services)
+    {
+        services.AddScoped<IBankAccountRepository, BankAccountRepository>();
+        services.AddScoped<IMigrationRepository, MigrationRepository>();
     }
 
     private static string GenerateConnectionString(IOptions<PostgresOptions> options)

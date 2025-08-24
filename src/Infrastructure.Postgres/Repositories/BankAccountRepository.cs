@@ -6,13 +6,13 @@ namespace Infrastructure.Postgres.Repositories;
 
 public class BankAccountRepository(
     NpgsqlConnection connection
-): IBankAccountRepository
+) : IBankAccountRepository
 {
     public async Task Create(string name)
     {
         const string sql = "INSERT INTO BankAccounts (Name) VALUES (@Name)";
 
-        await connection.ExecuteAsync(sql, new 
+        await connection.ExecuteAsync(sql, new
         {
             Name = name
         });

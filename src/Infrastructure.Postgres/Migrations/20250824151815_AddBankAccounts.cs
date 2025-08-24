@@ -4,7 +4,8 @@ using FluentMigrator.Postgres;
 namespace Infrastructure.Postgres.Migrations;
 
 [Migration(20250824151815)]
-public class AddBankAccounts : Migration {
+public class AddBankAccounts : Migration
+{
     public override void Up()
     {
         Create.Table("BankAccounts")

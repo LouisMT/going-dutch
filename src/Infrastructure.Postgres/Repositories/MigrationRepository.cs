@@ -5,7 +5,7 @@ namespace Infrastructure.Postgres.Repositories;
 
 public class MigrationRepository(
     IMigrationRunner migrationRunner
-): IMigrationRepository
+) : IMigrationRepository
 {
     public void Migrate()
     {
