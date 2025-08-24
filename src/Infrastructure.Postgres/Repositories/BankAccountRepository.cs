@@ -8,11 +8,11 @@ public class BankAccountRepository(
     NpgsqlConnection connection
 ) : IBankAccountRepository
 {
-    public async Task Create(string name)
+    public async Task<long> Create(string name)
     {
-        const string sql = "INSERT INTO BankAccounts (Name) VALUES (@Name)";
+        const string sql = "INSERT INTO bank_accounts (name) VALUES (@name) RETURNING id";
 
-        await connection.ExecuteAsync(sql, new
+        return await connection.ExecuteScalarAsync<long>(sql, new
         {
             Name = name
         });

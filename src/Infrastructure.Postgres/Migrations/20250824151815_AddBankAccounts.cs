@@ -8,13 +8,13 @@ public class AddBankAccounts : Migration
 {
     public override void Up()
     {
-        Create.Table("BankAccounts")
-            .WithColumn("Id").AsInt64().PrimaryKey().Identity()
-            .WithColumn("Name").AsString().NotNullable();
+        Create.Table("bank_accounts")
+            .WithColumn("id").AsInt64().PrimaryKey().Identity()
+            .WithColumn("name").AsString().NotNullable();
     }
 
     public override void Down()
     {
-        Delete.Table("BankAccounts");
+        Delete.Table("bank_accounts");
     }
 }

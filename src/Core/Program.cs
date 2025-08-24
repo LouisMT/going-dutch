@@ -1,3 +1,4 @@
+using Application.Extensions;
 using Domain.Extensions;
 using Domain.Repositories;
 using Infrastructure.Postgres.Extensions;
@@ -16,8 +17,11 @@ public static class Program
 
         builder.Services.AddDomain();
         builder.Services.AddPostgres();
+        builder.Services.AddApplication();
 
         var app = builder.Build();
+
+        app.MapControllers();
 
         if (app.Environment.IsDevelopment())
         {

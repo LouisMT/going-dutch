@@ -2,5 +2,5 @@ namespace Domain.Repositories;
 
 public interface IBankAccountRepository
 {
-    Task Create(string name);
+    Task<long> Create(string name);
 }
