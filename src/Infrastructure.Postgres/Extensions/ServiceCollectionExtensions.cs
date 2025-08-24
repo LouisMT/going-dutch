@@ -48,6 +48,8 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IBankAccountRepository, BankAccountRepository>();
         services.AddScoped<IContributorRepository, ContributorRepository>();
         services.AddScoped<IMigrationRepository, MigrationRepository>();
+        services.AddScoped<ISplitRuleEntryRepository, SplitRuleEntryRepository>();
+        services.AddScoped<ISplitRuleRepository, SplitRuleRepository>();
     }
 
     private static string GenerateConnectionString(IOptions<PostgresOptions> options)

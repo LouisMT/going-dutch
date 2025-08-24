@@ -6,13 +6,13 @@ using Npgsql;
 
 namespace Infrastructure.Postgres.Repositories;
 
-public class ContributorRepository(
+public class SplitRuleRepository(
     NpgsqlConnection connection
-) : IContributorRepository
+) : ISplitRuleRepository
 {
     public async Task<long> Create(string name)
     {
-        const string sql = "INSERT INTO contributors (name) VALUES (@Name) RETURNING id";
+        const string sql = "INSERT INTO split_rules (name) VALUES (@Name) RETURNING id";
 
         return await connection.ExecuteScalarAsync<long>(sql, new
         {
@@ -20,13 +20,13 @@ public class ContributorRepository(
         });
     }
 
-    public async Task<IReadOnlyCollection<Contributor>> List()
+    public async Task<IReadOnlyCollection<SplitRule>> List()
     {
-        const string sql = "SELECT id, name FROM contributors";
+        const string sql = "SELECT id, name FROM split_rules";
 
-        var rows = await connection.QueryAsync<ContributorEntity>(sql);
+        var rows = await connection.QueryAsync<SplitRuleEntity>(sql);
 
-        return rows.Select(r => new Contributor(
+        return rows.Select(r => new SplitRule(
             Id: r.Id,
             Name: r.Name
         )).ToList();

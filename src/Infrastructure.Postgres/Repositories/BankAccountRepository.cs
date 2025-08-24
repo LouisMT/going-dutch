@@ -12,7 +12,7 @@ public class BankAccountRepository(
 {
     public async Task<long> Create(string name)
     {
-        const string sql = "INSERT INTO bank_accounts (name) VALUES (@name) RETURNING id";
+        const string sql = "INSERT INTO bank_accounts (name) VALUES (@Name) RETURNING id";
 
         return await connection.ExecuteScalarAsync<long>(sql, new
         {
