@@ -11,7 +11,7 @@ public class CreateDepositUseCase(
 {
     public async Task<CreateDepositUseCaseResponse> Execute(CreateDepositUseCaseRequest request)
     {
-        var id = await depositRepository.Create(request.ContributorId, request.BankAccountId, request.Amount);
+        var id = await depositRepository.Create(request.TabId, request.ContributorId, request.BankAccountId, request.Amount);
 
         return new CreateDepositUseCaseResponse(
             Id: id

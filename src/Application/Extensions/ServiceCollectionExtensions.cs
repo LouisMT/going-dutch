@@ -13,11 +13,13 @@ public static class ServiceCollectionExtensions
         services.AddTransient<ICreateDepositUseCase, CreateDepositUseCase>();
         services.AddTransient<ICreateExpenseUseCase, CreateExpenseUseCase>();
         services.AddTransient<ICreateSplitRuleUseCase, CreateSplitRuleUseCase>();
+        services.AddTransient<ICreateTabUseCase, CreateTabUseCase>();
         services.AddTransient<IListBankAccountsUseCase, ListBankAccountsUseCase>();
         services.AddTransient<IListContributorsUseCase, ListContributorsUseCase>();
         services.AddTransient<IListDepositsUseCase, ListDepositsUseCase>();
         services.AddTransient<IListExpensesUseCase, ListExpensesUseCase>();
         services.AddTransient<IListSplitRulesUseCase, ListSplitRulesUseCase>();
+        services.AddTransient<IListTabsUseCase, ListTabsUseCase>();
 
         return services;
     }

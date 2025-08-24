@@ -18,7 +18,8 @@ public class DepositsController : ControllerBase
         var useCaseRequest = new CreateDepositUseCaseRequest(
             ContributorId: request.ContributorId!.Value,
             BankAccountId: request.BankAccountId!.Value,
-            Amount: request.Amount!.Value
+            Amount: request.Amount!.Value,
+            TabId: request.TabId!.Value
         );
 
         var useCaseResponse = await useCase.Execute(useCaseRequest);

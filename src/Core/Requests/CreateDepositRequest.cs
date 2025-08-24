@@ -5,6 +5,9 @@ namespace Core.Requests;
 public class CreateDepositRequest
 {
     [Required]
+    public long? TabId { get; init; }
+
+    [Required]
     public long? ContributorId { get; init; }
 
     [Required]

@@ -10,17 +10,18 @@ public class DepositRepository(
     NpgsqlConnection connection
 ) : IDepositRepository
 {
-    public async Task<long> Create(long contributorId, long bankAccountId, decimal amount)
+    public async Task<long> Create(long tabId, long contributorId, long bankAccountId, decimal amount)
     {
         const string sql =
             """
-            INSERT INTO deposits (contributor_id, bank_account_id, amount)
-            VALUES (@ContributorId, @BankAccountId, @Amount)
+            INSERT INTO deposits (tab_id, contributor_id, bank_account_id, amount)
+            VALUES (@tTabId, @ContributorId, @BankAccountId, @Amount)
             RETURNING id
             """;
 
         return await connection.ExecuteScalarAsync<long>(sql, new
         {
+            TabId = tabId,
             ContributorId = contributorId,
             BankAccountId = bankAccountId,
             Amount = amount

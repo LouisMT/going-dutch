@@ -52,6 +52,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IMigrationRepository, MigrationRepository>();
         services.AddScoped<ISplitRuleEntryRepository, SplitRuleEntryRepository>();
         services.AddScoped<ISplitRuleRepository, SplitRuleRepository>();
+        services.AddScoped<ITabRepository, TabRepository>();
     }
 
     private static string GenerateConnectionString(IOptions<PostgresOptions> options)
