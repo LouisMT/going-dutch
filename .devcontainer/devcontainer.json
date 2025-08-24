@@ -2,7 +2,7 @@
   "name": "GoingDutch",
   "dockerComposeFile": "docker-compose.yaml",
   "service": "app",
-  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "workspaceFolder": "/workspaces/going-dutch",
   "forwardPorts": [
     5148
   ]
