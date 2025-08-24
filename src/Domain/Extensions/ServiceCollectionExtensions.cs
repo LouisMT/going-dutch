@@ -16,6 +16,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddOptions<PostgresOptions>()
             .BindConfiguration(PostgresOptions.Name)
+            .ValidateDataAnnotations()
             .ValidateOnStart();
 
         return services;

@@ -1,4 +1,5 @@
 using Domain.Extensions;
+using Domain.Repositories;
 using Infrastructure.Postgres.Extensions;
 using Scalar.AspNetCore;
 
@@ -23,6 +24,10 @@ public static class Program
             app.MapOpenApi();
             app.MapScalarApiReference();
         }
+
+        using var serviceScope = app.Services.CreateScope();
+        var migrationRepository = serviceScope.ServiceProvider.GetRequiredService<IMigrationRepository>();
+        migrationRepository.Migrate();
 
         await app.RunAsync();
     }

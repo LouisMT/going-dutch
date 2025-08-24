@@ -405,9 +405,6 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
-# Local settings
-appsettings.Development.json
-
 # IDE specific
 .idea
 .vscode
