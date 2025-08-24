@@ -60,4 +60,19 @@ public class TabRepository(
             ClosedAt: row.ClosedAt
         );
     }
+
+    public async Task Close(long id)
+    {
+        const string sql =
+            """
+            UPDATE tabs
+            SET closed_at = CURRENT_TIMESTAMP
+            WHERE id = @Id
+            """;
+
+        await connection.ExecuteAsync(sql, new
+        {
+            Id = id
+        });
+    }
 }

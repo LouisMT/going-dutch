@@ -9,15 +9,17 @@ public class AddTabLines : Migration
     {
         Create.Table("tab_lines")
             .WithColumn("id").AsInt64().PrimaryKey().Identity()
+            .WithColumn("tab_id").AsInt64().NotNullable().ForeignKey("tabs", "id")
             .WithColumn("expense_id").AsInt64().NotNullable().ForeignKey("expenses", "id")
             .WithColumn("expense_name").AsString().NotNullable()
+            .WithColumn("expense_amount").AsDecimal().NotNullable()
             .WithColumn("split_rule_id").AsInt64().NotNullable().ForeignKey("split_rules", "id")
             .WithColumn("split_rule_name").AsString().NotNullable()
+            .WithColumn("split_rule_share").AsDecimal().NotNullable()
             .WithColumn("contributor_id").AsInt64().NotNullable().ForeignKey("contributors", "id")
             .WithColumn("contributor_name").AsString().NotNullable()
             .WithColumn("bank_account_id").AsInt64().NotNullable().ForeignKey("bank_accounts", "id")
-            .WithColumn("bank_account_name").AsString().NotNullable()
-            .WithColumn("amount").AsDecimal().NotNullable();
+            .WithColumn("bank_account_name").AsString().NotNullable();
 
         Alter.Table("tabs")
             .AddColumn("closed_at").AsDateTime2().Nullable().WithDefaultValue(null);

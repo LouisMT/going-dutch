@@ -42,6 +42,7 @@ public class TabsController : ControllerBase
 
     [HttpGet("{id:long}")]
     [ProducesResponseType<GetTabResponse>(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Get(long id, IGetTabUseCase useCase)
     {
         var useCaseRequest = new GetTabUseCaseRequest(
@@ -54,5 +55,19 @@ public class TabsController : ControllerBase
             Name: useCaseResponse.Name,
             ClosedAt: useCaseResponse.ClosedAt
         ));
+    }
+
+    [HttpPost("{id:long}/close")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Close(long id, ICloseTabUseCase useCase)
+    {
+        var useCaseRequest = new CloseTabUseCaseRequest(
+            Id: id
+        );
+
+        await useCase.Execute(useCaseRequest);
+
+        return Ok();
     }
 }
