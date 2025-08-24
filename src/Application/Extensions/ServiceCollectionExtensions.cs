@@ -9,6 +9,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
         services.AddTransient<ICreateBankAccountUseCase, CreateBankAccountUseCase>();
+        services.AddTransient<IListBankAccountsUseCase, ListBankAccountsUseCase>();
 
         return services;
     }

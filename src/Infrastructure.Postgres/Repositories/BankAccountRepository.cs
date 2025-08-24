@@ -1,5 +1,7 @@
 using Dapper;
+using Domain.Models;
 using Domain.Repositories;
+using Infrastructure.Postgres.Entities;
 using Npgsql;
 
 namespace Infrastructure.Postgres.Repositories;
@@ -16,5 +18,17 @@ public class BankAccountRepository(
         {
             Name = name
         });
+    }
+
+    public async Task<IReadOnlyCollection<BankAccount>> List()
+    {
+        const string sql = "SELECT id, name FROM bank_accounts";
+
+        var rows = await connection.QueryAsync<BankAccountEntity>(sql);
+
+        return rows.Select(r => new BankAccount(
+            Id: r.Id,
+            Name: r.Name
+        )).ToList();
     }
 }

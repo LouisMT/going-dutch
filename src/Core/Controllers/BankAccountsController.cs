@@ -24,4 +24,18 @@ public class BankAccountsController : ControllerBase
             Id: useCaseResponse.Id
         ));
     }
+
+    [HttpGet]
+    [ProducesResponseType<ListBankAccountsResponse>(StatusCodes.Status200OK)]
+    public async Task<IActionResult> List(IListBankAccountsUseCase useCase)
+    {
+        var useCaseResponse = await useCase.Execute();
+
+        return Ok(new ListBankAccountsResponse(
+            Items: useCaseResponse.Items.Select(i => new ListBankAccountItemResponse(
+                Id: i.Id,
+                Name: i.Name
+            ))
+        ));
+    }
 }
