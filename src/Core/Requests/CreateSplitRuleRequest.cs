@@ -6,9 +6,9 @@ namespace Core.Requests;
 public class CreateSplitRuleRequest
 {
     [Required]
-    public string? Name { get; set; }
+    public string? Name { get; init; }
 
     [Required]
     [ValidateEnumeratedItems]
-    public IReadOnlyCollection<CreateSplitRuleEntryRequest>? Entries { get; set; }
+    public IReadOnlyCollection<CreateSplitRuleEntryRequest>? Entries { get; init; }
 }

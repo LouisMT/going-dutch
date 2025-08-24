@@ -13,9 +13,9 @@ public class ListContributorsUseCase(
         var contributors = await contributorRepository.List();
 
         return new ListContributorsUseCaseResponse(
-            Items: contributors.Select(b => new ListContributorItemUseCaseResponse(
-                Id: b.Id,
-                Name: b.Name
+            Items: contributors.Select(c => new ListContributorItemUseCaseResponse(
+                Id: c.Id,
+                Name: c.Name
             )).ToList()
         );
     }

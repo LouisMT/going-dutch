@@ -5,5 +5,5 @@ namespace Core.Requests;
 public class CreateBankAccountRequest
 {
     [Required]
-    public string? Name { get; set; }
+    public string? Name { get; init; }
 }

@@ -11,28 +11,43 @@ public static class Program
     public static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateSlimBuilder(args);
-
-        builder.Services.AddControllers();
-        builder.Services.AddOpenApi();
-
-        builder.Services.AddDomain();
-        builder.Services.AddPostgres();
-        builder.Services.AddApplication();
+        builder.Services.ConfigureServices();
 
         var app = builder.Build();
+        app.ConfigureApplication();
 
-        app.MapControllers();
-
-        if (app.Environment.IsDevelopment())
-        {
-            app.MapOpenApi();
-            app.MapScalarApiReference();
-        }
-
-        using var serviceScope = app.Services.CreateScope();
-        var migrationRepository = serviceScope.ServiceProvider.GetRequiredService<IMigrationRepository>();
-        migrationRepository.Migrate();
+        MigrateDatabase(app.Services);
 
         await app.RunAsync();
+    }
+
+    private static void ConfigureServices(this IServiceCollection services)
+    {
+        services.AddControllers();
+        services.AddOpenApi();
+
+        services.AddDomain();
+        services.AddPostgres();
+        services.AddApplication();
+    }
+
+    private static void ConfigureApplication(this WebApplication app)
+    {
+        app.MapControllers();
+
+        if (!app.Environment.IsDevelopment())
+        {
+            return;
+        }
+
+        app.MapOpenApi();
+        app.MapScalarApiReference();
+    }
+
+    private static void MigrateDatabase(IServiceProvider serviceProvider)
+    {
+        using var serviceScope = serviceProvider.CreateScope();
+        var migrationRepository = serviceScope.ServiceProvider.GetRequiredService<IMigrationRepository>();
+        migrationRepository.Migrate();
     }
 }

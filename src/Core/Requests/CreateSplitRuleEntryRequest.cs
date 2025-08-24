@@ -5,8 +5,8 @@ namespace Core.Requests;
 public class CreateSplitRuleEntryRequest
 {
     [Required]
-    public long? ContributorId { get; set; }
+    public long? ContributorId { get; init; }
 
     [Required]
-    public decimal? Share { get; set; }
+    public decimal? Share { get; init; }
 }

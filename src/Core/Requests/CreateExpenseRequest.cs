@@ -5,17 +5,17 @@ namespace Core.Requests;
 public class CreateExpenseRequest
 {
     [Required]
-    public long? SplitRuleId { get; set; }
+    public long? SplitRuleId { get; init; }
 
     [Required]
-    public long? BankAccountId { get; set; }
+    public long? BankAccountId { get; init; }
 
     [Required]
-    public string? Name { get; set; }
+    public string? Name { get; init; }
 
     [Required]
-    public string? Description { get; set; }
+    public string? Description { get; init; }
 
     [Required]
-    public decimal? Amount { get; set; }
+    public decimal? Amount { get; init; }
 }
