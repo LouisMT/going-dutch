@@ -1,6 +1,6 @@
 namespace Infrastructure.Postgres.Entities;
 
-public class BankAccountEntity
+public class ListBankAccountEntity
 {
     public required long Id { get; init; }
 

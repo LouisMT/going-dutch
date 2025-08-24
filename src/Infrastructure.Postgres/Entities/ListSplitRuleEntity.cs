@@ -1,6 +1,6 @@
 namespace Infrastructure.Postgres.Entities;
 
-public class SplitRuleEntity
+public class ListSplitRuleEntity
 {
     public required long Id { get; init; }
 

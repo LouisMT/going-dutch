@@ -1,6 +1,6 @@
 namespace Infrastructure.Postgres.Entities;
 
-public class ContributorEntity
+public class ListExpenseEntity
 {
     public required long Id { get; init; }
 

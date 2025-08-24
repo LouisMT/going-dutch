@@ -33,7 +33,7 @@ public class SplitRuleRepository(
             FROM split_rules
             """;
 
-        var rows = await connection.QueryAsync<SplitRuleEntity>(sql);
+        var rows = await connection.QueryAsync<ListSplitRuleEntity>(sql);
 
         return rows.Select(r => new SplitRule(
             Id: r.Id,

@@ -33,7 +33,7 @@ public class BankAccountRepository(
             FROM bank_accounts
             """;
 
-        var rows = await connection.QueryAsync<BankAccountEntity>(sql);
+        var rows = await connection.QueryAsync<ListBankAccountEntity>(sql);
 
         return rows.Select(r => new BankAccount(
             Id: r.Id,

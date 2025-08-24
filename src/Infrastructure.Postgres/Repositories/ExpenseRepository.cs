@@ -37,7 +37,7 @@ public class ExpenseRepository(
             FROM expenses
             """;
 
-        var rows = await connection.QueryAsync<ExpenseEntity>(sql);
+        var rows = await connection.QueryAsync<ListExpenseEntity>(sql);
 
         return rows.Select(r => new Expense(
             Id: r.Id,

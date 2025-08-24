@@ -33,7 +33,7 @@ public class ContributorRepository(
             FROM contributors
             """;
 
-        var rows = await connection.QueryAsync<ContributorEntity>(sql);
+        var rows = await connection.QueryAsync<ListContributorEntity>(sql);
 
         return rows.Select(r => new Contributor(
             Id: r.Id,
