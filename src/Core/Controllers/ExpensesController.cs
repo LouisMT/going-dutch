@@ -12,6 +12,7 @@ public class ExpensesController : ControllerBase
 {
     [HttpPost]
     [ProducesResponseType<CreateExpenseResponse>(StatusCodes.Status200OK)]
+    [ProducesResponseType<ProblemDetails>(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create(CreateExpenseRequest request, ICreateExpenseUseCase useCase)
     {
         var useCaseRequest = new CreateExpenseUseCaseRequest(

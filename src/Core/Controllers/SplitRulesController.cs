@@ -12,6 +12,7 @@ public class SplitRulesController : ControllerBase
 {
     [HttpPost]
     [ProducesResponseType<CreateSplitRuleResponse>(StatusCodes.Status200OK)]
+    [ProducesResponseType<ProblemDetails>(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create(CreateSplitRuleRequest request, ICreateSplitRuleUseCase useCase)
     {
         var useCaseRequest = new CreateSplitRuleUseCaseRequest(

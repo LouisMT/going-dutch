@@ -12,6 +12,7 @@ public class ContributorsController : ControllerBase
 {
     [HttpPost]
     [ProducesResponseType<CreateContributorResponse>(StatusCodes.Status200OK)]
+    [ProducesResponseType<ProblemDetails>(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create(CreateContributorRequest request, ICreateContributorUseCase useCase)
     {
         var useCaseRequest = new CreateContributorUseCaseRequest(

@@ -12,6 +12,7 @@ public class BankAccountsController : ControllerBase
 {
     [HttpPost]
     [ProducesResponseType<CreateBankAccountResponse>(StatusCodes.Status200OK)]
+    [ProducesResponseType<ProblemDetails>(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create(CreateBankAccountRequest request, ICreateBankAccountUseCase useCase)
     {
         var useCaseRequest = new CreateBankAccountUseCaseRequest(
