@@ -47,6 +47,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddScoped<IBankAccountRepository, BankAccountRepository>();
         services.AddScoped<IContributorRepository, ContributorRepository>();
+        services.AddScoped<IExpenseRepository, ExpenseRepository>();
         services.AddScoped<IMigrationRepository, MigrationRepository>();
         services.AddScoped<ISplitRuleEntryRepository, SplitRuleEntryRepository>();
         services.AddScoped<ISplitRuleRepository, SplitRuleRepository>();

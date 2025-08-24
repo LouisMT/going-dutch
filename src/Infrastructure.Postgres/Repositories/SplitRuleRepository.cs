@@ -12,7 +12,12 @@ public class SplitRuleRepository(
 {
     public async Task<long> Create(string name)
     {
-        const string sql = "INSERT INTO split_rules (name) VALUES (@Name) RETURNING id";
+        const string sql =
+            """
+            INSERT INTO split_rules (name)
+            VALUES (@Name)
+            RETURNING id
+            """;
 
         return await connection.ExecuteScalarAsync<long>(sql, new
         {
@@ -22,7 +27,11 @@ public class SplitRuleRepository(
 
     public async Task<IReadOnlyCollection<SplitRule>> List()
     {
-        const string sql = "SELECT id, name FROM split_rules";
+        const string sql =
+            """
+            SELECT id, name
+            FROM split_rules
+            """;
 
         var rows = await connection.QueryAsync<SplitRuleEntity>(sql);
 

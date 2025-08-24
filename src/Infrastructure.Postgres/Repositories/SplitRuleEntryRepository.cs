@@ -13,7 +13,8 @@ public class SplitRuleEntryRepository(
         const string sql =
             """
             INSERT INTO split_rule_entries (split_rule_id, contributor_id, share)
-            VALUES (@SplitRuleId, @ContributorId, @Share) RETURNING id
+            VALUES (@SplitRuleId, @ContributorId, @Share)
+            RETURNING id
             """;
 
         return await connection.ExecuteScalarAsync<long>(sql, new

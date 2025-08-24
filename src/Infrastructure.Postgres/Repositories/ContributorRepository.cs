@@ -12,7 +12,12 @@ public class ContributorRepository(
 {
     public async Task<long> Create(string name)
     {
-        const string sql = "INSERT INTO contributors (name) VALUES (@Name) RETURNING id";
+        const string sql =
+            """
+            INSERT INTO contributors (name)
+            VALUES (@Name)
+            RETURNING id
+            """;
 
         return await connection.ExecuteScalarAsync<long>(sql, new
         {
@@ -22,7 +27,11 @@ public class ContributorRepository(
 
     public async Task<IReadOnlyCollection<Contributor>> List()
     {
-        const string sql = "SELECT id, name FROM contributors";
+        const string sql =
+            """
+            SELECT id, name
+            FROM contributors
+            """;
 
         var rows = await connection.QueryAsync<ContributorEntity>(sql);
 

@@ -12,7 +12,12 @@ public class BankAccountRepository(
 {
     public async Task<long> Create(string name)
     {
-        const string sql = "INSERT INTO bank_accounts (name) VALUES (@Name) RETURNING id";
+        const string sql =
+            """
+            INSERT INTO bank_accounts (name)
+            VALUES (@Name)
+            RETURNING id
+            """;
 
         return await connection.ExecuteScalarAsync<long>(sql, new
         {
@@ -22,7 +27,11 @@ public class BankAccountRepository(
 
     public async Task<IReadOnlyCollection<BankAccount>> List()
     {
-        const string sql = "SELECT id, name FROM bank_accounts";
+        const string sql =
+            """
+            SELECT id, name
+            FROM bank_accounts
+            """;
 
         var rows = await connection.QueryAsync<BankAccountEntity>(sql);
 
