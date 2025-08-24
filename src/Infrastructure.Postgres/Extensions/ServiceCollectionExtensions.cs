@@ -12,6 +12,8 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddPostgres(this IServiceCollection services)
     {
+        Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
+
         services.AddDataSource();
         services.AddMigrations();
         services.AddRepositories();
