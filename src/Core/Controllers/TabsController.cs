@@ -39,4 +39,20 @@ public class TabsController : ControllerBase
             ))
         ));
     }
+
+    [HttpGet("{id:long}")]
+    [ProducesResponseType<GetTabResponse>(StatusCodes.Status200OK)]
+    public async Task<IActionResult> Get(long id, IGetTabUseCase useCase)
+    {
+        var useCaseRequest = new GetTabUseCaseRequest(
+            Id: id
+        );
+
+        var useCaseResponse = await useCase.Execute(useCaseRequest);
+
+        return Ok(new GetTabResponse(
+            Name: useCaseResponse.Name,
+            ClosedAt: useCaseResponse.ClosedAt
+        ));
+    }
 }

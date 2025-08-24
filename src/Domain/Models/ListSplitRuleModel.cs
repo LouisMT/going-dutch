@@ -1,6 +1,6 @@
 namespace Domain.Models;
 
-public record Expense(
+public record ListSplitRuleModel(
     long Id,
     string Name
 );

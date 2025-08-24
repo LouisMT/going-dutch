@@ -25,7 +25,7 @@ public class TabRepository(
         });
     }
 
-    public async Task<IReadOnlyCollection<Tab>> List()
+    public async Task<IReadOnlyCollection<ListTabModel>> List()
     {
         const string sql =
             """
@@ -35,9 +35,29 @@ public class TabRepository(
 
         var rows = await connection.QueryAsync<ListTabEntity>(sql);
 
-        return rows.Select(r => new Tab(
+        return rows.Select(r => new ListTabModel(
             Id: r.Id,
             Name: r.Name
         )).ToList();
+    }
+
+    public async Task<GetTabModel> Get(long id)
+    {
+        const string sql =
+            """
+            SELECT name, closed_at
+            FROM tabs
+            WHERE id = @Id
+            """;
+
+        var row = await connection.QuerySingleAsync<GetTabEntity>(sql, new
+        {
+            Id = id
+        });
+
+        return new GetTabModel(
+            Name: row.Name,
+            ClosedAt: row.ClosedAt
+        );
     }
 }

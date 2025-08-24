@@ -29,7 +29,7 @@ public class ExpenseRepository(
         });
     }
 
-    public async Task<IReadOnlyCollection<Expense>> List()
+    public async Task<IReadOnlyCollection<ListExpenseModel>> List()
     {
         const string sql =
             """
@@ -39,7 +39,7 @@ public class ExpenseRepository(
 
         var rows = await connection.QueryAsync<ListExpenseEntity>(sql);
 
-        return rows.Select(r => new Expense(
+        return rows.Select(r => new ListExpenseModel(
             Id: r.Id,
             Name: r.Name
         )).ToList();

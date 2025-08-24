@@ -1,5 +1,5 @@
 namespace Domain.Models;
 
-public record Deposit(
+public record ListDepositModel(
     long Id
 );

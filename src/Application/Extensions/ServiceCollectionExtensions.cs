@@ -14,6 +14,7 @@ public static class ServiceCollectionExtensions
         services.AddTransient<ICreateExpenseUseCase, CreateExpenseUseCase>();
         services.AddTransient<ICreateSplitRuleUseCase, CreateSplitRuleUseCase>();
         services.AddTransient<ICreateTabUseCase, CreateTabUseCase>();
+        services.AddTransient<IGetTabUseCase, GetTabUseCase>();
         services.AddTransient<IListBankAccountsUseCase, ListBankAccountsUseCase>();
         services.AddTransient<IListContributorsUseCase, ListContributorsUseCase>();
         services.AddTransient<IListDepositsUseCase, ListDepositsUseCase>();

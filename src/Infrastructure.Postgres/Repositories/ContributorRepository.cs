@@ -25,7 +25,7 @@ public class ContributorRepository(
         });
     }
 
-    public async Task<IReadOnlyCollection<Contributor>> List()
+    public async Task<IReadOnlyCollection<ListContributorModel>> List()
     {
         const string sql =
             """
@@ -35,7 +35,7 @@ public class ContributorRepository(
 
         var rows = await connection.QueryAsync<ListContributorEntity>(sql);
 
-        return rows.Select(r => new Contributor(
+        return rows.Select(r => new ListContributorModel(
             Id: r.Id,
             Name: r.Name
         )).ToList();

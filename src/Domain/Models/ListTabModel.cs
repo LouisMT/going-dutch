@@ -1,6 +1,6 @@
 namespace Domain.Models;
 
-public record BankAccount(
+public record ListTabModel(
     long Id,
     string Name
 );

@@ -1,6 +1,6 @@
 namespace Domain.Models;
 
-public record SplitRule(
+public record ListContributorModel(
     long Id,
     string Name
 );

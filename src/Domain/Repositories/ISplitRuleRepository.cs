@@ -5,5 +5,5 @@ namespace Domain.Repositories;
 public interface ISplitRuleRepository
 {
     Task<long> Create(string name);
-    Task<IReadOnlyCollection<SplitRule>> List();
+    Task<IReadOnlyCollection<ListSplitRuleModel>> List();
 }

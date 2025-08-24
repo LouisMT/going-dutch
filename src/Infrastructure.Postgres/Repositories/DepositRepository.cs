@@ -28,7 +28,7 @@ public class DepositRepository(
         });
     }
 
-    public async Task<IReadOnlyCollection<Deposit>> List()
+    public async Task<IReadOnlyCollection<ListDepositModel>> List()
     {
         const string sql =
             """
@@ -38,7 +38,7 @@ public class DepositRepository(
 
         var rows = await connection.QueryAsync<ListDepositEntity>(sql);
 
-        return rows.Select(r => new Deposit(
+        return rows.Select(r => new ListDepositModel(
             Id: r.Id
         )).ToList();
     }

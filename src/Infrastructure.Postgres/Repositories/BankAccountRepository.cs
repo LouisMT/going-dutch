@@ -25,7 +25,7 @@ public class BankAccountRepository(
         });
     }
 
-    public async Task<IReadOnlyCollection<BankAccount>> List()
+    public async Task<IReadOnlyCollection<ListBankAccountModel>> List()
     {
         const string sql =
             """
@@ -35,7 +35,7 @@ public class BankAccountRepository(
 
         var rows = await connection.QueryAsync<ListBankAccountEntity>(sql);
 
-        return rows.Select(r => new BankAccount(
+        return rows.Select(r => new ListBankAccountModel(
             Id: r.Id,
             Name: r.Name
         )).ToList();

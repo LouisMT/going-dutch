@@ -5,5 +5,5 @@ namespace Domain.Repositories;
 public interface IBankAccountRepository
 {
     Task<long> Create(string name);
-    Task<IReadOnlyCollection<BankAccount>> List();
+    Task<IReadOnlyCollection<ListBankAccountModel>> List();
 }

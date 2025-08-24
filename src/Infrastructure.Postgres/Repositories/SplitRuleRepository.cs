@@ -25,7 +25,7 @@ public class SplitRuleRepository(
         });
     }
 
-    public async Task<IReadOnlyCollection<SplitRule>> List()
+    public async Task<IReadOnlyCollection<ListSplitRuleModel>> List()
     {
         const string sql =
             """
@@ -35,7 +35,7 @@ public class SplitRuleRepository(
 
         var rows = await connection.QueryAsync<ListSplitRuleEntity>(sql);
 
-        return rows.Select(r => new SplitRule(
+        return rows.Select(r => new ListSplitRuleModel(
             Id: r.Id,
             Name: r.Name
         )).ToList();

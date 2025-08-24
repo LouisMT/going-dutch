@@ -1,6 +1,6 @@
 namespace Domain.Models;
 
-public record Contributor(
+public record ListBankAccountModel(
     long Id,
     string Name
 );
