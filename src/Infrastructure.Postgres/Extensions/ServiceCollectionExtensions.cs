@@ -52,6 +52,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IMigrationRepository, MigrationRepository>();
         services.AddScoped<ISplitRuleEntryRepository, SplitRuleEntryRepository>();
         services.AddScoped<ISplitRuleRepository, SplitRuleRepository>();
+        services.AddScoped<ITabLineRepository, TabLineRepository>();
         services.AddScoped<ITabRepository, TabRepository>();
     }
 
