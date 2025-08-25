@@ -22,7 +22,7 @@ public class AddTabLines : Migration
             .WithColumn("bank_account_name").AsString().NotNullable();
 
         Alter.Table("tabs")
-            .AddColumn("closed_at").AsDateTime2().Nullable().WithDefaultValue(null);
+            .AddColumn("closed_at").AsDateTimeOffset().Nullable().WithDefaultValue(null);
 
         Delete.Column("is_closed")
             .FromTable("tabs");
