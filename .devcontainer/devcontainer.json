@@ -1,9 +1,0 @@
-{
-  "name": "GoingDutch",
-  "dockerComposeFile": "docker-compose.yaml",
-  "service": "app",
-  "workspaceFolder": "/workspaces/going-dutch",
-  "forwardPorts": [
-    5148
-  ]
-}

@@ -1,11 +1,4 @@
 services:
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    command: sleep infinity
-    network_mode: service:db
-
   db:
     image: postgres:14
     restart: unless-stopped
@@ -15,6 +8,8 @@ services:
       POSTGRES_PASSWORD: going-dutch
       POSTGRES_USER: going-dutch
       POSTGRES_DB: going-dutch
+    ports:
+      - 5432:5432
 
 volumes:
   postgres-data:
