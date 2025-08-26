@@ -10,9 +10,13 @@ dependencies:
   flutter:
     sdk: flutter
   go_router: ^16.2.0
+  http: ^1.5.0
+  json_annotation: ^4.9.0
 
 dev_dependencies:
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
+  build_runner: ^2.6.0
+  json_serializable: ^6.11.0
 
 flutter:
   uses-material-design: true
