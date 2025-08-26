@@ -18,5 +18,10 @@ public static class ServiceCollectionExtensions
             .BindConfiguration(PostgresOptions.Name)
             .ValidateDataAnnotations()
             .ValidateOnStart();
+
+        services.AddOptions<UiOptions>()
+            .BindConfiguration(UiOptions.Name)
+            .ValidateDataAnnotations()
+            .ValidateOnStart();
     }
 }
