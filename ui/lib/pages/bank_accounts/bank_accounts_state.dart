@@ -9,7 +9,7 @@ class BankAccountsLoadingState extends BankAccountsState {
 }
 
 class BankAccountsLoadedState extends BankAccountsState {
-  final ListBankAccounts response;
+  final ListBankAccountsResponse response;
 
   const BankAccountsLoadedState({required this.response});
 }

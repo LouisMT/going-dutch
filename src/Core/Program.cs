@@ -32,6 +32,7 @@ public static class Program
             {
                 a.AddDefaultPolicy(p => p
                     .WithOrigins(b.Value.Origin!)
+                    .AllowAnyHeader()
                     .AllowAnyMethod()
                 );
             });
