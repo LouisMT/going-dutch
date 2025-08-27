@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:going_dutch_ui/containers/main_container.dart';
-import 'package:going_dutch_ui/pages/bank_accounts_page.dart';
+import 'package:going_dutch_ui/pages/bank_accounts/bank_accounts_page.dart';
 import 'package:going_dutch_ui/pages/contributors_page.dart';
 import 'package:going_dutch_ui/pages/expenses_page.dart';
 import 'package:going_dutch_ui/pages/split_rules_page.dart';
