@@ -5,8 +5,6 @@ class SplitRulesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('Split Rules'),
-    );
+    return Center(child: Text('Split Rules'));
   }
 }

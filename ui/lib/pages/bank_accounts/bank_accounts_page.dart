@@ -23,21 +23,18 @@ class BankAccountsContent extends StatelessWidget {
     return Center(
       child: BlocBuilder<BankAccountsCubit, BankAccountsState>(
         builder: (context, state) => switch (state) {
-          BankAccountsLoadingState() =>
-            CircularProgressIndicator(),
-          BankAccountsErrorState() =>
-            Text('Error while loading bank accounts'),
-          BankAccountsLoadedState() =>
-            ListView(
-              children: state.response.items.map((i) {
-                return Card(
-                  child: ListTile(
-                    title: Text(i.name),
-                    subtitle: Text('#${i.id}'),
-                  ),
-                );
-              }).toList(),
-            ),
+          BankAccountsLoadingState() => CircularProgressIndicator(),
+          BankAccountsErrorState() => Text('Error while loading bank accounts'),
+          BankAccountsLoadedState() => ListView(
+            children: state.response.items.map((i) {
+              return Card(
+                child: ListTile(
+                  title: Text(i.name),
+                  subtitle: Text('#${i.id}'),
+                ),
+              );
+            }).toList(),
+          ),
         },
       ),
     );

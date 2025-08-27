@@ -11,11 +11,14 @@ final router = GoRouter(
   initialLocation: '/bank-accounts',
   routes: [
     StatefulShellRoute.indexedStack(
-      builder: (BuildContext context, GoRouterState state, StatefulNavigationShell navigationShell) {
-        return MainContainer(
-          navigationShell: navigationShell,
-        );
-      },
+      builder:
+          (
+            BuildContext context,
+            GoRouterState state,
+            StatefulNavigationShell navigationShell,
+          ) {
+            return MainContainer(navigationShell: navigationShell);
+          },
       branches: [
         StatefulShellBranch(
           routes: [
@@ -51,10 +54,7 @@ final router = GoRouter(
         ),
         StatefulShellBranch(
           routes: [
-            GoRoute(
-              path: '/tabs',
-              builder: (context, state) => TabsPage(),
-            ),
+            GoRoute(path: '/tabs', builder: (context, state) => TabsPage()),
           ],
         ),
       ],

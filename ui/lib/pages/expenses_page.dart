@@ -5,8 +5,6 @@ class ExpensesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('Expenses'),
-    );
+    return Center(child: Text('Expenses'));
   }
 }

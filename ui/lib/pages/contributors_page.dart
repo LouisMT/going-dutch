@@ -5,8 +5,6 @@ class ContributorsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('Contributors'),
-    );
+    return Center(child: Text('Contributors'));
   }
 }

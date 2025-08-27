@@ -9,9 +9,7 @@ class MainContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('GoingDutch'),
-      ),
+      appBar: AppBar(title: Text('GoingDutch')),
       body: Row(
         children: [
           NavigationRail(
@@ -44,9 +42,7 @@ class MainContainer extends StatelessWidget {
             },
           ),
           VerticalDivider(),
-          Expanded(
-            child: navigationShell
-          ),
+          Expanded(child: navigationShell),
         ],
       ),
     );
