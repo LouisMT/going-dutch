@@ -26,10 +26,12 @@ final router = GoRouter(
             GoRoute(
               path: '/bank-accounts',
               builder: (context, state) => BankAccountsPage(),
-            ),
-            GoRoute(
-              path: '/bank-accounts/create',
-              builder: (context, state) => CreateBankAccountPage(),
+              routes: [
+                GoRoute(
+                  path: '/create',
+                  builder: (context, state) => CreateBankAccountPage(),
+                ),
+              ],
             ),
           ],
         ),

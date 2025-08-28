@@ -9,15 +9,18 @@ class CreateBankAccountPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => CreateBankAccountCubit(),
-      child: BlocListener<CreateBankAccountCubit, CreateBankAccountState>(
-        listener: (context, state) {
-          if (state is CreateBankAccountFinishedState) {
-            context.go('/bank-accounts');
-          }
-        },
-        child: CreateBankAccountContent(),
+    return Scaffold(
+      appBar: AppBar(title: Text('GoingDutch - Create Bank Account')),
+      body: BlocProvider(
+        create: (_) => CreateBankAccountCubit(),
+        child: BlocListener<CreateBankAccountCubit, CreateBankAccountState>(
+          listener: (context, state) {
+            if (state is CreateBankAccountFinishedState) {
+              context.go('/bank-accounts');
+            }
+          },
+          child: CreateBankAccountContent(),
+        ),
       ),
     );
   }

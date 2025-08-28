@@ -9,7 +9,6 @@ class MainContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('GoingDutch')),
       body: Row(
         children: [
           NavigationRail(
@@ -41,7 +40,7 @@ class MainContainer extends StatelessWidget {
               navigationShell.goBranch(index);
             },
           ),
-          VerticalDivider(),
+          VerticalDivider(width: 1),
           Expanded(child: navigationShell),
         ],
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:going_dutch_ui/pages/bank_accounts/bank_accounts_cubit.dart';
 import 'package:going_dutch_ui/pages/bank_accounts/bank_accounts_state.dart';
 
@@ -8,9 +9,20 @@ class BankAccountsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => BankAccountsCubit(),
-      child: BankAccountsContent(),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('GoingDutch - Bank Accounts'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () => context.go('/bank-accounts/create'),
+          ),
+        ],
+      ),
+      body: BlocProvider(
+        create: (_) => BankAccountsCubit(),
+        child: BankAccountsContent(),
+      ),
     );
   }
 }
