@@ -5,8 +5,9 @@ import 'package:going_dutch_ui/pages/bank_accounts/bank_accounts_page.dart';
 import 'package:going_dutch_ui/pages/contributors/contributors_page.dart';
 import 'package:going_dutch_ui/pages/create_bank_account/create_bank_account_page.dart';
 import 'package:going_dutch_ui/pages/create_contributor/create_contributor_page.dart';
+import 'package:going_dutch_ui/pages/create_split_rule/create_split_rule_page.dart';
 import 'package:going_dutch_ui/pages/expenses_page.dart';
-import 'package:going_dutch_ui/pages/split_rules_page.dart';
+import 'package:going_dutch_ui/pages/split_rules/split_rules_page.dart';
 import 'package:going_dutch_ui/pages/tabs_page.dart';
 
 final router = GoRouter(
@@ -55,6 +56,12 @@ final router = GoRouter(
             GoRoute(
               path: '/split-rules',
               builder: (context, state) => SplitRulesPage(),
+              routes: [
+                GoRoute(
+                  path: '/create',
+                  builder: (context, state) => CreateSplitRulePage(),
+                ),
+              ],
             ),
           ],
         ),

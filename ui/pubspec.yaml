@@ -8,9 +8,11 @@ environment:
 
 dependencies:
   bloc: ^9.0.0
+  collection: ^1.19.1
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.1
+  freezed_annotation: ^3.1.0
   go_router: ^16.2.0
   http: ^1.5.0
   json_annotation: ^4.9.0
@@ -19,6 +21,7 @@ dev_dependencies:
   flutter_lints: ^6.0.0
   build_runner: ^2.6.0
   json_serializable: ^6.11.0
+  freezed: ^3.2.0
 
 flutter:
   uses-material-design: true
