@@ -34,34 +34,46 @@ class CreateSplitRuleContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 16,
-        children: [
-          InfoLabel(
-            label: 'Name:',
-            child: TextBox(
-              onChanged: (text) {
-                context.read<CreateSplitRuleCubit>().setName(text);
-              },
-            ),
+    return BlocBuilder<CreateSplitRuleCubit, CreateSplitRuleState>(
+      builder: (context, state) => switch (state.status) {
+        CreateSplitRuleStatus.loading ||
+        CreateSplitRuleStatus.created => Center(child: ProgressRing()),
+        CreateSplitRuleStatus.error => Center(
+          child: InfoBar(
+            title: Text('Failed to create split rule'),
+            severity: InfoBarSeverity.error,
           ),
-          _Contributors(),
-          Button(
-            onPressed: () {
-              context.read<CreateSplitRuleCubit>().addContributor();
-            },
-            child: Text('Add contributor'),
+        ),
+        CreateSplitRuleStatus.pending => Form(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: 16,
+            children: [
+              InfoLabel(
+                label: 'Name:',
+                child: TextBox(
+                  onChanged: (text) {
+                    context.read<CreateSplitRuleCubit>().setName(text);
+                  },
+                ),
+              ),
+              _Contributors(),
+              Button(
+                onPressed: () {
+                  context.read<CreateSplitRuleCubit>().addContributor();
+                },
+                child: Text('Add contributor'),
+              ),
+              Button(
+                onPressed: () {
+                  context.read<CreateSplitRuleCubit>().submit();
+                },
+                child: Text('Create'),
+              ),
+            ],
           ),
-          Button(
-            onPressed: () {
-              context.read<CreateSplitRuleCubit>().submit();
-            },
-            child: Text('Create'),
-          ),
-        ],
-      ),
+        ),
+      },
     );
   }
 }

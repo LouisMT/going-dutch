@@ -32,27 +32,39 @@ class CreateContributorContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 16,
-        children: [
-          InfoLabel(
-            label: 'Name:',
-            child: TextBox(
-              onChanged: (text) {
-                context.read<CreateContributorCubit>().setName(text);
-              },
-            ),
+    return BlocBuilder<CreateContributorCubit, CreateContributorState>(
+      builder: (context, state) => switch (state.status) {
+        CreateContributorStatus.loading ||
+        CreateContributorStatus.created => Center(child: ProgressRing()),
+        CreateContributorStatus.error => Center(
+          child: InfoBar(
+            title: Text('Failed to create contributor'),
+            severity: InfoBarSeverity.error,
           ),
-          Button(
-            onPressed: () {
-              context.read<CreateContributorCubit>().submit();
-            },
-            child: Text('Create'),
+        ),
+        CreateContributorStatus.pending => Form(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: 16,
+            children: [
+              InfoLabel(
+                label: 'Name:',
+                child: TextBox(
+                  onChanged: (text) {
+                    context.read<CreateContributorCubit>().setName(text);
+                  },
+                ),
+              ),
+              Button(
+                onPressed: () {
+                  context.read<CreateContributorCubit>().submit();
+                },
+                child: Text('Create'),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      },
     );
   }
 }

@@ -32,27 +32,39 @@ class CreateBankAccountContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 16,
-        children: [
-          InfoLabel(
-            label: 'Name:',
-            child: TextBox(
-              onChanged: (text) {
-                context.read<CreateBankAccountCubit>().setName(text);
-              },
-            ),
+    return BlocBuilder<CreateBankAccountCubit, CreateBankAccountState>(
+      builder: (context, state) => switch (state.status) {
+        CreateBankAccountStatus.loading ||
+        CreateBankAccountStatus.created => Center(child: ProgressRing()),
+        CreateBankAccountStatus.error => Center(
+          child: InfoBar(
+            title: Text('Failed to create bank account'),
+            severity: InfoBarSeverity.error,
           ),
-          Button(
-            onPressed: () {
-              context.read<CreateBankAccountCubit>().submit();
-            },
-            child: Text('Create'),
+        ),
+        CreateBankAccountStatus.pending => Form(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: 16,
+            children: [
+              InfoLabel(
+                label: 'Name:',
+                child: TextBox(
+                  onChanged: (text) {
+                    context.read<CreateBankAccountCubit>().setName(text);
+                  },
+                ),
+              ),
+              Button(
+                onPressed: () {
+                  context.read<CreateBankAccountCubit>().submit();
+                },
+                child: Text('Create'),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      },
     );
   }
 }

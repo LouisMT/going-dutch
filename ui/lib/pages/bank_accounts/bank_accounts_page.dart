@@ -37,23 +37,26 @@ class BankAccountsContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: BlocBuilder<BankAccountsCubit, BankAccountsState>(
-        builder: (context, state) => switch (state.status) {
-          BankAccountsStatus.loading => ProgressRing(),
-          BankAccountsStatus.error => Text('Error while loading bank accounts'),
-          BankAccountsStatus.loaded => ListView.builder(
-            itemCount: state.items.length,
-            itemBuilder: (context, index) {
-              final item = state.items[index];
-              return ListTile(
-                title: Text(item.name),
-                subtitle: Text('#${item.id}'),
-              );
-            },
+    return BlocBuilder<BankAccountsCubit, BankAccountsState>(
+      builder: (context, state) => switch (state.status) {
+        BankAccountsStatus.loading => Center(child: ProgressRing()),
+        BankAccountsStatus.error => Center(
+          child: InfoBar(
+            title: Text('Failed to load bank accounts'),
+            severity: InfoBarSeverity.error,
           ),
-        },
-      ),
+        ),
+        BankAccountsStatus.loaded => ListView.builder(
+          itemCount: state.items.length,
+          itemBuilder: (context, index) {
+            final item = state.items[index];
+            return ListTile(
+              title: Text(item.name),
+              subtitle: Text('#${item.id}'),
+            );
+          },
+        ),
+      },
     );
   }
 }

@@ -37,23 +37,26 @@ class SplitRulesContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: BlocBuilder<SplitRulesCubit, SplitRulesState>(
-        builder: (context, state) => switch (state.status) {
-          SplitRulesStatus.loading => ProgressRing(),
-          SplitRulesStatus.error => Text('Error while loading split rules'),
-          SplitRulesStatus.loaded => ListView.builder(
-            itemCount: state.items.length,
-            itemBuilder: (context, index) {
-              final item = state.items[index];
-              return ListTile(
-                title: Text(item.name),
-                subtitle: Text('#${item.id}'),
-              );
-            },
+    return BlocBuilder<SplitRulesCubit, SplitRulesState>(
+      builder: (context, state) => switch (state.status) {
+        SplitRulesStatus.loading => Center(child: ProgressRing()),
+        SplitRulesStatus.error => Center(
+          child: InfoBar(
+            title: Text('Failed to load split rules'),
+            severity: InfoBarSeverity.error,
           ),
-        },
-      ),
+        ),
+        SplitRulesStatus.loaded => ListView.builder(
+          itemCount: state.items.length,
+          itemBuilder: (context, index) {
+            final item = state.items[index];
+            return ListTile(
+              title: Text(item.name),
+              subtitle: Text('#${item.id}'),
+            );
+          },
+        ),
+      },
     );
   }
 }
