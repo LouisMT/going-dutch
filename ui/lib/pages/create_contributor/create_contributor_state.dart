@@ -1,11 +1,13 @@
-sealed class CreateContributorState {
-  const CreateContributorState();
-}
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class CreateContributorPendingState extends CreateContributorState {
-  const CreateContributorPendingState();
-}
+part 'create_contributor_state.freezed.dart';
 
-class CreateContributorFinishedState extends CreateContributorState {
-  const CreateContributorFinishedState();
+enum CreateContributorStatus { pending, loading, created, error }
+
+@freezed
+sealed class CreateContributorState with _$CreateContributorState {
+  factory CreateContributorState({
+    required CreateContributorStatus status,
+    required String name,
+  }) = _CreateContributorState;
 }

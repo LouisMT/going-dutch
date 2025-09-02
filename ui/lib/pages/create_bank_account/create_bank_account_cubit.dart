@@ -3,17 +3,28 @@ import 'package:going_dutch_ui/pages/create_bank_account/create_bank_account_sta
 import 'package:going_dutch_ui/repositories/bank_account_repository.dart';
 
 class CreateBankAccountCubit extends Cubit<CreateBankAccountState> {
-  String name = '';
-
-  CreateBankAccountCubit() : super(CreateBankAccountPendingState());
+  CreateBankAccountCubit()
+    : super(
+        CreateBankAccountState(
+          status: CreateBankAccountStatus.pending,
+          name: '',
+        ),
+      );
 
   void setName(String name) {
-    this.name = name;
+    emit(state.copyWith(name: name));
   }
 
   Future<void> submit() async {
-    final request = CreateBankAccountRequest(name: name);
-    await createBankAccount(request);
-    emit(CreateBankAccountFinishedState());
+    try {
+      emit(state.copyWith(status: CreateBankAccountStatus.loading));
+
+      final request = CreateBankAccountRequest(name: state.name);
+      await createBankAccount(request);
+
+      emit(state.copyWith(status: CreateBankAccountStatus.created));
+    } catch (e, s) {
+      emit(state.copyWith(status: CreateBankAccountStatus.error));
+    }
   }
 }

@@ -3,17 +3,28 @@ import 'package:going_dutch_ui/pages/create_contributor/create_contributor_state
 import 'package:going_dutch_ui/repositories/contributor_repository.dart';
 
 class CreateContributorCubit extends Cubit<CreateContributorState> {
-  String name = '';
-
-  CreateContributorCubit() : super(CreateContributorPendingState());
+  CreateContributorCubit()
+    : super(
+        CreateContributorState(
+          status: CreateContributorStatus.pending,
+          name: '',
+        ),
+      );
 
   void setName(String name) {
-    this.name = name;
+    emit(state.copyWith(name: name));
   }
 
   Future<void> submit() async {
-    final request = CreateContributorRequest(name: name);
-    await createContributor(request);
-    emit(CreateContributorFinishedState());
+    try {
+      emit(state.copyWith(status: CreateContributorStatus.loading));
+
+      final request = CreateContributorRequest(name: state.name);
+      await createContributor(request);
+
+      emit(state.copyWith(status: CreateContributorStatus.created));
+    } catch (e, s) {
+      emit(state.copyWith(status: CreateContributorStatus.error));
+    }
   }
 }

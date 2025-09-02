@@ -1,19 +1,14 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:going_dutch_ui/repositories/contributor_repository.dart';
 
-sealed class ContributorsState {
-  const ContributorsState();
-}
+part 'contributors_state.freezed.dart';
 
-class ContributorsLoadingState extends ContributorsState {
-  const ContributorsLoadingState();
-}
+enum ContributorsStatus { loading, loaded, error }
 
-class ContributorsLoadedState extends ContributorsState {
-  final ListContributorsResponse response;
-
-  const ContributorsLoadedState({required this.response});
-}
-
-class ContributorsErrorState extends ContributorsState {
-  const ContributorsErrorState();
+@freezed
+sealed class ContributorsState with _$ContributorsState {
+  factory ContributorsState({
+    required ContributorsStatus status,
+    required List<ListContributorItemResponse> items,
+  }) = _ContributorsState;
 }

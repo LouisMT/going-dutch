@@ -1,11 +1,13 @@
-sealed class CreateBankAccountState {
-  const CreateBankAccountState();
-}
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class CreateBankAccountPendingState extends CreateBankAccountState {
-  const CreateBankAccountPendingState();
-}
+part 'create_bank_account_state.freezed.dart';
 
-class CreateBankAccountFinishedState extends CreateBankAccountState {
-  const CreateBankAccountFinishedState();
+enum CreateBankAccountStatus { pending, loading, created, error }
+
+@freezed
+sealed class CreateBankAccountState with _$CreateBankAccountState {
+  factory CreateBankAccountState({
+    required CreateBankAccountStatus status,
+    required String name,
+  }) = _CreateBankAccountState;
 }

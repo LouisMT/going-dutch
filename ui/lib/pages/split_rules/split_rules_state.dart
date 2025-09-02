@@ -1,19 +1,14 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:going_dutch_ui/repositories/split_rule_repository.dart';
 
-sealed class SplitRulesState {
-  const SplitRulesState();
-}
+part 'split_rules_state.freezed.dart';
 
-class SplitRulesLoadingState extends SplitRulesState {
-  const SplitRulesLoadingState();
-}
+enum SplitRulesStatus { loading, loaded, error }
 
-class SplitRulesLoadedState extends SplitRulesState {
-  final ListSplitRulesResponse response;
-
-  const SplitRulesLoadedState({required this.response});
-}
-
-class SplitRulesErrorState extends SplitRulesState {
-  const SplitRulesErrorState();
+@freezed
+sealed class SplitRulesState with _$SplitRulesState {
+  factory SplitRulesState({
+    required SplitRulesStatus status,
+    required List<ListSplitRuleItemResponse> items,
+  }) = _SplitRulesState;
 }

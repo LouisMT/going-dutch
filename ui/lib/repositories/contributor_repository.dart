@@ -1,27 +1,25 @@
 import 'dart:convert';
 
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:http/http.dart' as http;
-import 'package:json_annotation/json_annotation.dart';
 
+part 'contributor_repository.freezed.dart';
 part 'contributor_repository.g.dart';
 
-@JsonSerializable()
-class ListContributorItemResponse {
-  final int id;
-
-  final String name;
-
-  const ListContributorItemResponse({required this.id, required this.name});
+@freezed
+sealed class ListContributorItemResponse with _$ListContributorItemResponse {
+  factory ListContributorItemResponse({required int id, required String name}) =
+      _ListContributorItemResponse;
 
   factory ListContributorItemResponse.fromJson(Map<String, dynamic> json) =>
       _$ListContributorItemResponseFromJson(json);
 }
 
-@JsonSerializable()
-class ListContributorsResponse {
-  final List<ListContributorItemResponse> items;
-
-  const ListContributorsResponse({required this.items});
+@freezed
+sealed class ListContributorsResponse with _$ListContributorsResponse {
+  factory ListContributorsResponse({
+    required List<ListContributorItemResponse> items,
+  }) = _ListContributorsResponse;
 
   factory ListContributorsResponse.fromJson(Map<String, dynamic> json) =>
       _$ListContributorsResponseFromJson(json);
@@ -41,20 +39,19 @@ Future<ListContributorsResponse> listContributors() async {
   }
 }
 
-@JsonSerializable()
-class CreateContributorRequest {
-  final String name;
+@freezed
+sealed class CreateContributorRequest with _$CreateContributorRequest {
+  factory CreateContributorRequest({required String name}) =
+      _CreateContributorRequest;
 
-  const CreateContributorRequest({required this.name});
-
-  Map<String, dynamic> toJson() => _$CreateContributorRequestToJson(this);
+  factory CreateContributorRequest.fromJson(Map<String, dynamic> json) =>
+      _$CreateContributorRequestFromJson(json);
 }
 
-@JsonSerializable()
-class CreateContributorResponse {
-  final int id;
-
-  const CreateContributorResponse({required this.id});
+@freezed
+sealed class CreateContributorResponse with _$CreateContributorResponse {
+  factory CreateContributorResponse({required int id}) =
+      _CreateContributorResponse;
 
   factory CreateContributorResponse.fromJson(Map<String, dynamic> json) =>
       _$CreateContributorResponseFromJson(json);

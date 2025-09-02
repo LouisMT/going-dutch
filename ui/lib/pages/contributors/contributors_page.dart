@@ -1,25 +1,30 @@
-import 'package:flutter/material.dart';
+import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:going_dutch_ui/pages/contributors/contributors_cubit.dart';
 import 'package:going_dutch_ui/pages/contributors/contributors_state.dart';
+import 'package:going_dutch_ui/route_names.dart';
 
 class ContributorsPage extends StatelessWidget {
   const ContributorsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('GoingDutch - Contributors'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () => context.go('/contributors/create'),
-          ),
-        ],
+    return ScaffoldPage.withPadding(
+      header: PageHeader(
+        title: Text('Contributors'),
+        commandBar: CommandBar(
+          mainAxisAlignment: MainAxisAlignment.end,
+          primaryItems: [
+            CommandBarButton(
+              icon: Icon(FluentIcons.add),
+              label: Text('Create'),
+              onPressed: () => context.goNamed(RouteNames.createContributor),
+            ),
+          ],
+        ),
       ),
-      body: BlocProvider(
+      content: BlocProvider(
         create: (_) => ContributorsCubit(),
         child: ContributorsContent(),
       ),
@@ -34,18 +39,18 @@ class ContributorsContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: BlocBuilder<ContributorsCubit, ContributorsState>(
-        builder: (context, state) => switch (state) {
-          ContributorsLoadingState() => CircularProgressIndicator(),
-          ContributorsErrorState() => Text('Error while loading contributors'),
-          ContributorsLoadedState() => ListView(
-            children: state.response.items.map((i) {
-              return Card(
-                child: ListTile(
-                  title: Text(i.name),
-                  subtitle: Text('#${i.id}'),
-                ),
+        builder: (context, state) => switch (state.status) {
+          ContributorsStatus.loading => ProgressRing(),
+          ContributorsStatus.error => Text('Error while loading contributors'),
+          ContributorsStatus.loaded => ListView.builder(
+            itemCount: state.items.length,
+            itemBuilder: (context, index) {
+              final item = state.items[index];
+              return ListTile(
+                title: Text(item.name),
+                subtitle: Text('#${item.id}'),
               );
-            }).toList(),
+            },
           ),
         },
       ),

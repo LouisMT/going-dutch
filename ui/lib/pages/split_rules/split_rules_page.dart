@@ -1,25 +1,30 @@
-import 'package:flutter/material.dart';
+import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:going_dutch_ui/pages/split_rules/split_rules_cubit.dart';
 import 'package:going_dutch_ui/pages/split_rules/split_rules_state.dart';
+import 'package:going_dutch_ui/route_names.dart';
 
 class SplitRulesPage extends StatelessWidget {
   const SplitRulesPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('GoingDutch - SplitRules'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () => context.go('/split-rules/create'),
-          ),
-        ],
+    return ScaffoldPage.withPadding(
+      header: PageHeader(
+        title: Text('Split Rules'),
+        commandBar: CommandBar(
+          mainAxisAlignment: MainAxisAlignment.end,
+          primaryItems: [
+            CommandBarButton(
+              icon: Icon(FluentIcons.add),
+              label: Text('Create'),
+              onPressed: () => context.goNamed(RouteNames.createSplitRule),
+            ),
+          ],
+        ),
       ),
-      body: BlocProvider(
+      content: BlocProvider(
         create: (_) => SplitRulesCubit(),
         child: SplitRulesContent(),
       ),
@@ -34,18 +39,18 @@ class SplitRulesContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: BlocBuilder<SplitRulesCubit, SplitRulesState>(
-        builder: (context, state) => switch (state) {
-          SplitRulesLoadingState() => CircularProgressIndicator(),
-          SplitRulesErrorState() => Text('Error while loading split rules'),
-          SplitRulesLoadedState() => ListView(
-            children: state.response.items.map((i) {
-              return Card(
-                child: ListTile(
-                  title: Text(i.name),
-                  subtitle: Text('#${i.id}'),
-                ),
+        builder: (context, state) => switch (state.status) {
+          SplitRulesStatus.loading => ProgressRing(),
+          SplitRulesStatus.error => Text('Error while loading split rules'),
+          SplitRulesStatus.loaded => ListView.builder(
+            itemCount: state.items.length,
+            itemBuilder: (context, index) {
+              final item = state.items[index];
+              return ListTile(
+                title: Text(item.name),
+                subtitle: Text('#${item.id}'),
               );
-            }).toList(),
+            },
           ),
         },
       ),

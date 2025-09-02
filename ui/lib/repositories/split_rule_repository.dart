@@ -1,27 +1,25 @@
 import 'dart:convert';
 
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:http/http.dart' as http;
-import 'package:json_annotation/json_annotation.dart';
 
+part 'split_rule_repository.freezed.dart';
 part 'split_rule_repository.g.dart';
 
-@JsonSerializable()
-class ListSplitRuleItemResponse {
-  final int id;
-
-  final String name;
-
-  const ListSplitRuleItemResponse({required this.id, required this.name});
+@freezed
+sealed class ListSplitRuleItemResponse with _$ListSplitRuleItemResponse {
+  factory ListSplitRuleItemResponse({required int id, required String name}) =
+      _ListSplitRuleItemResponse;
 
   factory ListSplitRuleItemResponse.fromJson(Map<String, dynamic> json) =>
       _$ListSplitRuleItemResponseFromJson(json);
 }
 
-@JsonSerializable()
-class ListSplitRulesResponse {
-  final List<ListSplitRuleItemResponse> items;
-
-  const ListSplitRulesResponse({required this.items});
+@freezed
+sealed class ListSplitRulesResponse with _$ListSplitRulesResponse {
+  factory ListSplitRulesResponse({
+    required List<ListSplitRuleItemResponse> items,
+  }) = _ListSplitRulesResponse;
 
   factory ListSplitRulesResponse.fromJson(Map<String, dynamic> json) =>
       _$ListSplitRulesResponseFromJson(json);
@@ -41,42 +39,31 @@ Future<ListSplitRulesResponse> listSplitRules() async {
   }
 }
 
-@JsonSerializable()
-class CreateSplitRuleRequest {
-  final String name;
-
-  final List<CreateSplitRuleEntryRequest> entries;
-
-  const CreateSplitRuleRequest({required this.name, required this.entries});
+@freezed
+sealed class CreateSplitRuleRequest with _$CreateSplitRuleRequest {
+  factory CreateSplitRuleRequest({
+    required String name,
+    required List<CreateSplitRuleEntryRequest> entries,
+  }) = _CreateSplitRuleRequest;
 
   factory CreateSplitRuleRequest.fromJson(Map<String, dynamic> json) =>
       _$CreateSplitRuleRequestFromJson(json);
-
-  Map<String, dynamic> toJson() => _$CreateSplitRuleRequestToJson(this);
 }
 
-@JsonSerializable()
-class CreateSplitRuleEntryRequest {
-  final int contributorId;
-
-  final double share;
-
-  const CreateSplitRuleEntryRequest({
-    required this.contributorId,
-    required this.share,
-  });
+@freezed
+sealed class CreateSplitRuleEntryRequest with _$CreateSplitRuleEntryRequest {
+  factory CreateSplitRuleEntryRequest({
+    required int contributorId,
+    required double share,
+  }) = _CreateSplitRuleEntryRequest;
 
   factory CreateSplitRuleEntryRequest.fromJson(Map<String, dynamic> json) =>
       _$CreateSplitRuleEntryRequestFromJson(json);
-
-  Map<String, dynamic> toJson() => _$CreateSplitRuleEntryRequestToJson(this);
 }
 
-@JsonSerializable()
-class CreateSplitRuleResponse {
-  final int id;
-
-  const CreateSplitRuleResponse({required this.id});
+@freezed
+sealed class CreateSplitRuleResponse with _$CreateSplitRuleResponse {
+  factory CreateSplitRuleResponse({required int id}) = _CreateSplitRuleResponse;
 
   factory CreateSplitRuleResponse.fromJson(Map<String, dynamic> json) =>
       _$CreateSplitRuleResponseFromJson(json);

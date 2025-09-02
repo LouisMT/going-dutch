@@ -1,22 +1,23 @@
-import 'package:flutter/material.dart';
+import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:going_dutch_ui/pages/create_bank_account/create_bank_account_cubit.dart';
 import 'package:going_dutch_ui/pages/create_bank_account/create_bank_account_state.dart';
+import 'package:going_dutch_ui/route_names.dart';
 
 class CreateBankAccountPage extends StatelessWidget {
   const CreateBankAccountPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('GoingDutch - Create Bank Account')),
-      body: BlocProvider(
+    return ScaffoldPage.withPadding(
+      header: PageHeader(title: Text('Create Bank Account')),
+      content: BlocProvider(
         create: (_) => CreateBankAccountCubit(),
         child: BlocListener<CreateBankAccountCubit, CreateBankAccountState>(
           listener: (context, state) {
-            if (state is CreateBankAccountFinishedState) {
-              context.go('/bank-accounts');
+            if (state.status == CreateBankAccountStatus.created) {
+              context.goNamed(RouteNames.listBankAccounts);
             }
           },
           child: CreateBankAccountContent(),
@@ -33,13 +34,18 @@ class CreateBankAccountContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Form(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: 16,
         children: [
-          TextFormField(
-            onChanged: (text) {
-              context.read<CreateBankAccountCubit>().setName(text);
-            },
+          InfoLabel(
+            label: 'Name:',
+            child: TextBox(
+              onChanged: (text) {
+                context.read<CreateBankAccountCubit>().setName(text);
+              },
+            ),
           ),
-          ElevatedButton(
+          Button(
             onPressed: () {
               context.read<CreateBankAccountCubit>().submit();
             },

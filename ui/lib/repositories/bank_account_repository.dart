@@ -1,27 +1,25 @@
 import 'dart:convert';
 
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:http/http.dart' as http;
-import 'package:json_annotation/json_annotation.dart';
 
+part 'bank_account_repository.freezed.dart';
 part 'bank_account_repository.g.dart';
 
-@JsonSerializable()
-class ListBankAccountItemResponse {
-  final int id;
-
-  final String name;
-
-  const ListBankAccountItemResponse({required this.id, required this.name});
+@freezed
+sealed class ListBankAccountItemResponse with _$ListBankAccountItemResponse {
+  factory ListBankAccountItemResponse({required int id, required String name}) =
+      _ListBankAccountItemResponse;
 
   factory ListBankAccountItemResponse.fromJson(Map<String, dynamic> json) =>
       _$ListBankAccountItemResponseFromJson(json);
 }
 
-@JsonSerializable()
-class ListBankAccountsResponse {
-  final List<ListBankAccountItemResponse> items;
-
-  const ListBankAccountsResponse({required this.items});
+@freezed
+sealed class ListBankAccountsResponse with _$ListBankAccountsResponse {
+  factory ListBankAccountsResponse({
+    required List<ListBankAccountItemResponse> items,
+  }) = _ListBankAccountsResponse;
 
   factory ListBankAccountsResponse.fromJson(Map<String, dynamic> json) =>
       _$ListBankAccountsResponseFromJson(json);
@@ -41,20 +39,19 @@ Future<ListBankAccountsResponse> listBankAccounts() async {
   }
 }
 
-@JsonSerializable()
-class CreateBankAccountRequest {
-  final String name;
+@freezed
+sealed class CreateBankAccountRequest with _$CreateBankAccountRequest {
+  factory CreateBankAccountRequest({required String name}) =
+      _CreateBankAccountRequest;
 
-  const CreateBankAccountRequest({required this.name});
-
-  Map<String, dynamic> toJson() => _$CreateBankAccountRequestToJson(this);
+  factory CreateBankAccountRequest.fromJson(Map<String, dynamic> json) =>
+      _$CreateBankAccountRequestFromJson(json);
 }
 
-@JsonSerializable()
-class CreateBankAccountResponse {
-  final int id;
-
-  const CreateBankAccountResponse({required this.id});
+@freezed
+sealed class CreateBankAccountResponse with _$CreateBankAccountResponse {
+  factory CreateBankAccountResponse({required int id}) =
+      _CreateBankAccountResponse;
 
   factory CreateBankAccountResponse.fromJson(Map<String, dynamic> json) =>
       _$CreateBankAccountResponseFromJson(json);

@@ -6,20 +6,20 @@ part of 'contributor_repository.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ListContributorItemResponse _$ListContributorItemResponseFromJson(
+_ListContributorItemResponse _$ListContributorItemResponseFromJson(
   Map<String, dynamic> json,
-) => ListContributorItemResponse(
+) => _ListContributorItemResponse(
   id: (json['id'] as num).toInt(),
   name: json['name'] as String,
 );
 
 Map<String, dynamic> _$ListContributorItemResponseToJson(
-  ListContributorItemResponse instance,
+  _ListContributorItemResponse instance,
 ) => <String, dynamic>{'id': instance.id, 'name': instance.name};
 
-ListContributorsResponse _$ListContributorsResponseFromJson(
+_ListContributorsResponse _$ListContributorsResponseFromJson(
   Map<String, dynamic> json,
-) => ListContributorsResponse(
+) => _ListContributorsResponse(
   items: (json['items'] as List<dynamic>)
       .map(
         (e) => ListContributorItemResponse.fromJson(e as Map<String, dynamic>),
@@ -28,21 +28,21 @@ ListContributorsResponse _$ListContributorsResponseFromJson(
 );
 
 Map<String, dynamic> _$ListContributorsResponseToJson(
-  ListContributorsResponse instance,
+  _ListContributorsResponse instance,
 ) => <String, dynamic>{'items': instance.items};
 
-CreateContributorRequest _$CreateContributorRequestFromJson(
+_CreateContributorRequest _$CreateContributorRequestFromJson(
   Map<String, dynamic> json,
-) => CreateContributorRequest(name: json['name'] as String);
+) => _CreateContributorRequest(name: json['name'] as String);
 
 Map<String, dynamic> _$CreateContributorRequestToJson(
-  CreateContributorRequest instance,
+  _CreateContributorRequest instance,
 ) => <String, dynamic>{'name': instance.name};
 
-CreateContributorResponse _$CreateContributorResponseFromJson(
+_CreateContributorResponse _$CreateContributorResponseFromJson(
   Map<String, dynamic> json,
-) => CreateContributorResponse(id: (json['id'] as num).toInt());
+) => _CreateContributorResponse(id: (json['id'] as num).toInt());
 
 Map<String, dynamic> _$CreateContributorResponseToJson(
-  CreateContributorResponse instance,
+  _CreateContributorResponse instance,
 ) => <String, dynamic>{'id': instance.id};

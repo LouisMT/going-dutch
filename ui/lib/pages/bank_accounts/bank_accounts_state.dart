@@ -1,19 +1,14 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:going_dutch_ui/repositories/bank_account_repository.dart';
 
-sealed class BankAccountsState {
-  const BankAccountsState();
-}
+part 'bank_accounts_state.freezed.dart';
 
-class BankAccountsLoadingState extends BankAccountsState {
-  const BankAccountsLoadingState();
-}
+enum BankAccountsStatus { loading, loaded, error }
 
-class BankAccountsLoadedState extends BankAccountsState {
-  final ListBankAccountsResponse response;
-
-  const BankAccountsLoadedState({required this.response});
-}
-
-class BankAccountsErrorState extends BankAccountsState {
-  const BankAccountsErrorState();
+@freezed
+sealed class BankAccountsState with _$BankAccountsState {
+  factory BankAccountsState({
+    required BankAccountsStatus status,
+    required List<ListBankAccountItemResponse> items,
+  }) = _BankAccountsState;
 }

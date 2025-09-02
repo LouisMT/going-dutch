@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:fluent_ui/fluent_ui.dart';
 import 'package:going_dutch_ui/router.dart';
 
 class App extends StatelessWidget {
@@ -6,16 +6,10 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
+    return FluentApp.router(
       debugShowCheckedModeBanner: false,
       title: 'GoingDutch',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        appBarTheme: AppBarTheme(
-          backgroundColor: Colors.blue,
-          foregroundColor: Colors.white,
-        ),
-      ),
+      theme: FluentThemeData(accentColor: Colors.blue),
       routerConfig: router,
     );
   }

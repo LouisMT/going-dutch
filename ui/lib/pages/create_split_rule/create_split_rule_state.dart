@@ -3,29 +3,22 @@ import 'package:going_dutch_ui/repositories/contributor_repository.dart';
 
 part 'create_split_rule_state.freezed.dart';
 
+enum CreateSplitRuleStatus { pending, loading, created, error }
+
 @freezed
-class CreateSplitRuleState with _$CreateSplitRuleState {
-  final List<Entry> entries;
-
-  final List<ListContributorItemResponse> contributors;
-
-  final bool finished;
-
-  final String name;
-
-  const CreateSplitRuleState({
-    required this.entries,
-    required this.contributors,
-    required this.finished,
-    required this.name,
-  });
+sealed class CreateSplitRuleState with _$CreateSplitRuleState {
+  factory CreateSplitRuleState({
+    required CreateSplitRuleStatus status,
+    required List<ListContributorItemResponse> contributors,
+    required String name,
+    required List<Entry> entries,
+  }) = _CreateSplitRuleState;
 }
 
 @freezed
-class Entry with _$Entry {
-  int? contributorId;
-
-  double? share;
-
-  Entry({required this.contributorId, this.share});
+sealed class Entry with _$Entry {
+  factory Entry({
+    required ListContributorItemResponse? contributor,
+    required double share,
+  }) = _Entry;
 }
