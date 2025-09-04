@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:going_dutch_ui/constants.dart';
 import 'package:http/http.dart' as http;
 
 part 'bank_account_repository.freezed.dart';
@@ -27,7 +28,7 @@ sealed class ListBankAccountsResponse with _$ListBankAccountsResponse {
 
 Future<ListBankAccountsResponse> listBankAccounts() async {
   final response = await http.get(
-    Uri.parse('http://localhost:5148/bank-accounts'),
+    Uri.parse('${apiBaseUrl}/bank-accounts'),
   );
 
   if (response.statusCode == 200) {
@@ -61,7 +62,7 @@ Future<CreateBankAccountResponse> createBankAccount(
   CreateBankAccountRequest request,
 ) async {
   final response = await http.post(
-    Uri.parse('http://localhost:5148/bank-accounts'),
+    Uri.parse('${apiBaseUrl}/bank-accounts'),
     headers: {'Content-Type': 'application/json'},
     body: jsonEncode(request.toJson()),
   );

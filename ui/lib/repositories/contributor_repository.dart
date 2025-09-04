@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:going_dutch_ui/constants.dart';
 import 'package:http/http.dart' as http;
 
 part 'contributor_repository.freezed.dart';
@@ -27,7 +28,7 @@ sealed class ListContributorsResponse with _$ListContributorsResponse {
 
 Future<ListContributorsResponse> listContributors() async {
   final response = await http.get(
-    Uri.parse('http://localhost:5148/contributors'),
+    Uri.parse('${apiBaseUrl}/contributors'),
   );
 
   if (response.statusCode == 200) {
@@ -61,7 +62,7 @@ Future<CreateContributorResponse> createContributor(
   CreateContributorRequest request,
 ) async {
   final response = await http.post(
-    Uri.parse('http://localhost:5148/contributors'),
+    Uri.parse('${apiBaseUrl}/contributors'),
     headers: {'Content-Type': 'application/json'},
     body: jsonEncode(request.toJson()),
   );

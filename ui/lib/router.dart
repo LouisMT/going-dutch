@@ -1,5 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:go_router/go_router.dart';
+import 'package:going_dutch_ui/constants.dart';
 import 'package:going_dutch_ui/pages/bank_accounts/bank_accounts_page.dart';
 import 'package:going_dutch_ui/pages/contributors/contributors_page.dart';
 import 'package:going_dutch_ui/pages/create_bank_account/create_bank_account_page.dart';
@@ -135,7 +136,7 @@ final router = GoRouter(
     ShellRoute(
       routes: _routes,
       builder: (context, state, child) => NavigationView(
-        appBar: NavigationAppBar(title: Text('GoingDutch')),
+        appBar: NavigationAppBar(title: Text('GoingDutch (${runtimeType})')),
         pane: NavigationPane(
           selected: _routeIndexByName[GoRouterState.of(context).topRoute!.name],
           items: _items,

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:going_dutch_ui/constants.dart';
 import 'package:http/http.dart' as http;
 
 part 'split_rule_repository.freezed.dart';
@@ -27,7 +28,7 @@ sealed class ListSplitRulesResponse with _$ListSplitRulesResponse {
 
 Future<ListSplitRulesResponse> listSplitRules() async {
   final response = await http.get(
-    Uri.parse('http://localhost:5148/split-rules'),
+    Uri.parse('${apiBaseUrl}/split-rules'),
   );
 
   if (response.statusCode == 200) {
@@ -73,7 +74,7 @@ Future<CreateSplitRuleResponse> createSplitRule(
   CreateSplitRuleRequest request,
 ) async {
   final response = await http.post(
-    Uri.parse('http://localhost:5148/split-rules'),
+    Uri.parse('${apiBaseUrl}/split-rules'),
     headers: {'Content-Type': 'application/json'},
     body: jsonEncode(request.toJson()),
   );
