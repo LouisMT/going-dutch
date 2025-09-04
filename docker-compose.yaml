@@ -1,4 +1,15 @@
 services:
+  app:
+    build: .
+    restart: unless-stopped
+    environment:
+      POSTGRES__HOST: db
+      POSTGRES__USERNAME: going-dutch
+      POSTGRES__PASSWORD: going-dutch
+      POSTGRES__DATABASE: going-dutch
+    ports:
+      - 8080:8080
+
   db:
     image: postgres:14
     restart: unless-stopped
