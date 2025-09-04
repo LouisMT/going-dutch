@@ -30,11 +30,14 @@ public static class Program
         services.AddOptions<CorsOptions>()
             .Configure<IOptions<UiOptions>>((a, b) =>
             {
-                a.AddDefaultPolicy(p => p
-                    .WithOrigins(b.Value.Origin!)
-                    .AllowAnyHeader()
-                    .AllowAnyMethod()
-                );
+                if (b.Value.Origin is not null)
+                {
+                    a.AddDefaultPolicy(p => p
+                        .WithOrigins(b.Value.Origin)
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                    );
+                }
             });
 
         services.AddControllers();
@@ -52,7 +55,16 @@ public static class Program
         app.MapControllers();
 
         app.UseDefaultFiles();
-        app.UseStaticFiles();
+        app.UseStaticFiles(new StaticFileOptions
+        {
+            OnPrepareResponse = (c) =>
+            {
+                // Allow the WASM UI to use multiple threads, see:
+                // https://docs.flutter.dev/platform-integration/web/wasm#serve-the-built-output-with-an-http-server
+                c.Context.Response.Headers["Cross-Origin-Embedder-Policy"] = "require-corp";
+                c.Context.Response.Headers["Cross-Origin-Opener-Policy"] = "same-origin";
+            }
+        });
 
         if (!app.Environment.IsDevelopment())
         {
