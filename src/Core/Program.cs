@@ -48,7 +48,11 @@ public static class Program
     private static void ConfigureApplication(this WebApplication app)
     {
         app.UseCors();
+
         app.MapControllers();
+
+        app.UseDefaultFiles();
+        app.UseStaticFiles();
 
         if (!app.Environment.IsDevelopment())
         {
