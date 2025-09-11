@@ -17,6 +17,6 @@ updates:
     schedule:
       interval: "weekly"
   - package-ecosystem: "pub"
-    directory: "/"
+    directory: "/ui"
     schedule:
       interval: "weekly"
