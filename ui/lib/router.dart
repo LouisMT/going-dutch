@@ -136,7 +136,7 @@ final router = GoRouter(
     ShellRoute(
       routes: _routes,
       builder: (context, state, child) => NavigationView(
-        appBar: NavigationAppBar(title: Text('GoingDutch (${runtimeType})')),
+        appBar: NavigationAppBar(title: Text('GoingDutch ($runtimeType)')),
         pane: NavigationPane(
           selected: _routeIndexByName[GoRouterState.of(context).topRoute!.name],
           items: _items,

@@ -23,7 +23,7 @@ class CreateContributorCubit extends Cubit<CreateContributorState> {
       await createContributor(request);
 
       emit(state.copyWith(status: CreateContributorStatus.created));
-    } catch (e, s) {
+    } catch (e) {
       emit(state.copyWith(status: CreateContributorStatus.error));
     }
   }

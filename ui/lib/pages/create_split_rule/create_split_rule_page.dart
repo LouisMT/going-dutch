@@ -79,7 +79,7 @@ class CreateSplitRuleContent extends StatelessWidget {
 }
 
 class _Contributors extends StatelessWidget {
-  const _Contributors({super.key});
+  const _Contributors();
 
   @override
   Widget build(BuildContext context) {

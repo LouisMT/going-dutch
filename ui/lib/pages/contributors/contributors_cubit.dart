@@ -22,7 +22,7 @@ class ContributorsCubit extends Cubit<ContributorsState> {
           items: response.items,
         ),
       );
-    } catch (e, s) {
+    } catch (e) {
       emit(state.copyWith(status: ContributorsStatus.error, items: []));
     }
   }

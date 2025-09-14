@@ -23,7 +23,7 @@ class CreateBankAccountCubit extends Cubit<CreateBankAccountState> {
       await createBankAccount(request);
 
       emit(state.copyWith(status: CreateBankAccountStatus.created));
-    } catch (e, s) {
+    } catch (e) {
       emit(state.copyWith(status: CreateBankAccountStatus.error));
     }
   }

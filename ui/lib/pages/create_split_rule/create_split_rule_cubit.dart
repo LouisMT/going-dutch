@@ -61,7 +61,7 @@ class CreateSplitRuleCubit extends Cubit<CreateSplitRuleState> {
           contributors: contributors.items,
         ),
       );
-    } catch (e, s) {
+    } catch (e) {
       emit(
         state.copyWith(status: CreateSplitRuleStatus.error, contributors: []),
       );
@@ -85,7 +85,7 @@ class CreateSplitRuleCubit extends Cubit<CreateSplitRuleState> {
       await createSplitRule(request);
 
       emit(state.copyWith(status: CreateSplitRuleStatus.created));
-    } catch (e, s) {
+    } catch (e) {
       emit(state.copyWith(status: CreateSplitRuleStatus.error));
     }
   }

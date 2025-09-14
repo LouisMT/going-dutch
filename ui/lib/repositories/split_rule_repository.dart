@@ -28,7 +28,7 @@ sealed class ListSplitRulesResponse with _$ListSplitRulesResponse {
 
 Future<ListSplitRulesResponse> listSplitRules() async {
   final response = await http.get(
-    Uri.parse('${apiBaseUrl}/split-rules'),
+    Uri.parse('$apiBaseUrl/split-rules'),
   );
 
   if (response.statusCode == 200) {
@@ -74,7 +74,7 @@ Future<CreateSplitRuleResponse> createSplitRule(
   CreateSplitRuleRequest request,
 ) async {
   final response = await http.post(
-    Uri.parse('${apiBaseUrl}/split-rules'),
+    Uri.parse('$apiBaseUrl/split-rules'),
     headers: {'Content-Type': 'application/json'},
     body: jsonEncode(request.toJson()),
   );

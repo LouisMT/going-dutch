@@ -22,7 +22,7 @@ class BankAccountsCubit extends Cubit<BankAccountsState> {
           items: response.items,
         ),
       );
-    } catch (e, s) {
+    } catch (e) {
       emit(state.copyWith(status: BankAccountsStatus.error, items: []));
     }
   }

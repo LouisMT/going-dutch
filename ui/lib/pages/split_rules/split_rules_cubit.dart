@@ -19,7 +19,7 @@ class SplitRulesCubit extends Cubit<SplitRulesState> {
       emit(
         state.copyWith(status: SplitRulesStatus.loaded, items: response.items),
       );
-    } catch (e, s) {
+    } catch (e) {
       emit(state.copyWith(status: SplitRulesStatus.error, items: []));
     }
   }

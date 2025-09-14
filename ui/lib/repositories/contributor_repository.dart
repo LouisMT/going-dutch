@@ -28,7 +28,7 @@ sealed class ListContributorsResponse with _$ListContributorsResponse {
 
 Future<ListContributorsResponse> listContributors() async {
   final response = await http.get(
-    Uri.parse('${apiBaseUrl}/contributors'),
+    Uri.parse('$apiBaseUrl/contributors'),
   );
 
   if (response.statusCode == 200) {
@@ -62,7 +62,7 @@ Future<CreateContributorResponse> createContributor(
   CreateContributorRequest request,
 ) async {
   final response = await http.post(
-    Uri.parse('${apiBaseUrl}/contributors'),
+    Uri.parse('$apiBaseUrl/contributors'),
     headers: {'Content-Type': 'application/json'},
     body: jsonEncode(request.toJson()),
   );
