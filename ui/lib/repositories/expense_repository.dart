@@ -36,3 +36,43 @@ Future<ListExpensesResponse> listExpenses() async {
     throw Exception('Failed to load expenses');
   }
 }
+
+@freezed
+sealed class CreateExpenseRequest with _$CreateExpenseRequest {
+  factory CreateExpenseRequest({
+    required int splitRuleId,
+    required int bankAccountId,
+    required String name,
+    required String description,
+    required double amount,
+  }) = _CreateExpenseRequest;
+
+  factory CreateExpenseRequest.fromJson(Map<String, dynamic> json) =>
+      _$CreateExpenseRequestFromJson(json);
+}
+
+@freezed
+sealed class CreateExpenseResponse with _$CreateExpenseResponse {
+  factory CreateExpenseResponse({required int id}) = _CreateExpenseResponse;
+
+  factory CreateExpenseResponse.fromJson(Map<String, dynamic> json) =>
+      _$CreateExpenseResponseFromJson(json);
+}
+
+Future<CreateExpenseResponse> createExpense(
+  CreateExpenseRequest request,
+) async {
+  final response = await http.post(
+    Uri.parse('$apiBaseUrl/expenses'),
+    headers: {'Content-Type': 'application/json'},
+    body: jsonEncode(request.toJson()),
+  );
+
+  if (response.statusCode == 200) {
+    return CreateExpenseResponse.fromJson(
+      jsonDecode(response.body) as Map<String, dynamic>,
+    );
+  } else {
+    throw Exception('Failed to create expense');
+  }
+}
