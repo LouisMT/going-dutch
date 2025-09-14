@@ -27,9 +27,7 @@ sealed class ListBankAccountsResponse with _$ListBankAccountsResponse {
 }
 
 Future<ListBankAccountsResponse> listBankAccounts() async {
-  final response = await http.get(
-    Uri.parse('$apiBaseUrl/bank-accounts'),
-  );
+  final response = await http.get(Uri.parse('$apiBaseUrl/bank-accounts'));
 
   if (response.statusCode == 200) {
     return ListBankAccountsResponse.fromJson(

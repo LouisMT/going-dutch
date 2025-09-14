@@ -1,11 +1,12 @@
 FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:9.0 AS builder
+ARG FLUTTER_VERSION=3.35.3
 
 WORKDIR /build
 
 RUN apt-get update -y && \
   apt-get install -y curl git unzip xz-utils zip libglu1-mesa && \
   git config --global --add safe.directory '*' && \
-  curl -o flutter.tar.xz https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.35.2-stable.tar.xz && \
+  curl -o flutter.tar.xz https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_$FLUTTER_VERSION-stable.tar.xz && \
   tar -xf flutter.tar.xz
 
 ENV PATH="$PATH:/build/flutter/bin"

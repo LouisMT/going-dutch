@@ -27,9 +27,7 @@ sealed class ListContributorsResponse with _$ListContributorsResponse {
 }
 
 Future<ListContributorsResponse> listContributors() async {
-  final response = await http.get(
-    Uri.parse('$apiBaseUrl/contributors'),
-  );
+  final response = await http.get(Uri.parse('$apiBaseUrl/contributors'));
 
   if (response.statusCode == 200) {
     return ListContributorsResponse.fromJson(
