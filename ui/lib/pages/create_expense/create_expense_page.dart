@@ -1,4 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:going_dutch_ui/pages/create_expense/create_expense_cubit.dart';
@@ -107,10 +108,12 @@ class CreateExpenseContent extends StatelessWidget {
                 label: 'Amount:',
                 child: TextBox(
                   keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
+                  ],
                   onChanged: (text) {
-                    context.read<CreateExpenseCubit>().setAmount(
-                      double.parse(text),
-                    );
+                    final amount = double.tryParse(text) ?? 0;
+                    context.read<CreateExpenseCubit>().setAmount(amount);
                   },
                 ),
               ),
