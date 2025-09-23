@@ -1,5 +1,5 @@
-FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:9.0 AS builder
-ARG FLUTTER_VERSION=3.35.3
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:10.0 AS builder
+ARG FLUTTER_VERSION=3.35.4
 
 WORKDIR /build
 
@@ -21,7 +21,7 @@ COPY src src
 RUN cd src && \
   dotnet publish Core -c Release -o build
 
-FROM mcr.microsoft.com/dotnet/aspnet:9.0
+FROM mcr.microsoft.com/dotnet/aspnet:10.0
 
 WORKDIR /app
 
