@@ -16,7 +16,17 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    groups: 
+      nuget-minor:
+        update-types:
+          - "minor"
+          - "patch"
   - package-ecosystem: "pub"
     directory: "/ui"
     schedule:
       interval: "weekly"
+    groups:
+      pub-minor:
+        update-types:
+          - "minor"
+          - "patch"
