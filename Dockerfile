@@ -1,5 +1,5 @@
 FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:10.0 AS builder
-ARG FLUTTER_VERSION=3.35.4
+ARG FLUTTER_VERSION=3.35.7
 
 WORKDIR /build
 
