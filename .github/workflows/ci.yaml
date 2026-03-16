@@ -25,7 +25,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
       - name: Meta
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@v6
         with:
           images: |
             ghcr.io/louismt/going-dutch
